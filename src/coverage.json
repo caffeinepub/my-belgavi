@@ -1,0 +1,73 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-19T21:24:26.284Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 4,
+    "implemented": 3,
+    "items": [
+      {
+        "id": "REQ-34",
+        "summary": "Debug and fix the live GPS vehicle tracking in TransportMap.tsx so that vehicle locations are fetched from the backend getVehicleLocations query and displayed as moving markers on the Google Maps interface with proper automatic updates",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/TransportMap.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/TransportMap.tsx"
+        ]
+      },
+      {
+        "id": "REQ-35",
+        "summary": "Verify that the backend getVehicleLocations query returns valid vehicle location data with all required fields (id, name, latitude, longitude, type) and proper data types",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-36",
+        "summary": "Ensure the frontend useQueries hook in useQueries.ts properly configures the vehicle locations query with appropriate refetch intervals (e.g., every 5 seconds) and error handling",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useQueries.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useQueries.ts"
+        ]
+      },
+      {
+        "id": "REQ-37",
+        "summary": "Fix the Google Maps marker management in TransportMap.tsx to properly add, update, and remove vehicle markers as location data changes, ensuring markers move smoothly without duplicates",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/TransportMap.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/TransportMap.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/TransportMap.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useQueries.ts",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

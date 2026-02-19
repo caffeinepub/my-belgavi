@@ -1,0 +1,60 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Fix GPS vehicle tracking on transport map",
+  "requirements": [
+    {
+      "id": "REQ-34",
+      "summary": "Debug and fix live GPS vehicle tracking in TransportMap.tsx to display moving markers on Google Maps with automatic updates",
+      "acceptanceCriteria": [
+        "Vehicle locations are successfully fetched from backend getVehicleLocations query",
+        "Vehicle markers appear on the Google Maps component in the transport page",
+        "Vehicle markers update their positions automatically as location data changes",
+        "No console errors related to GPS tracking or map marker updates",
+        "Users can see real-time vehicle movement on the map"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/TransportMap.tsx",
+          "operation": "modify",
+          "description": "Fix the Google Maps marker management to properly handle vehicle locations from the useVehicleLocations hook. Implement marker lifecycle: add new vehicle markers when vehicles appear, update existing marker positions smoothly when location data changes, and remove markers when vehicles disappear. Ensure proper marker reference tracking to prevent duplicates and implement smooth position transitions. Wire the vehicle data from useVehicleLocations hook to the map component's state and marker rendering logic. Add error boundary handling for map loading failures and display appropriate loading states while fetching vehicle data."
+        }
+      ]
+    },
+    {
+      "id": "REQ-36",
+      "summary": "Configure vehicle locations query with automatic refetch intervals and error handling in useQueries.ts",
+      "acceptanceCriteria": [
+        "useVehicleLocations hook is properly configured with refetchInterval",
+        "Query automatically refetches vehicle data at regular intervals",
+        "Error states are properly handled and displayed to users",
+        "Loading states are shown while fetching data"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add or update the useVehicleLocations hook with proper refetchInterval configuration (5 seconds) for automatic polling. Configure the query with enabled condition based on actor availability, proper error handling with retry logic, and staleTime/cacheTime settings appropriate for real-time data. Ensure the hook returns loading, error, and data states that the TransportMap component can consume. Add proper TypeScript types for the Vehicle array response matching the backend interface definition."
+        }
+      ]
+    },
+    {
+      "id": "REQ-37",
+      "summary": "Implement proper Google Maps marker add/update/remove logic for smooth vehicle tracking without duplicates",
+      "acceptanceCriteria": [
+        "Vehicle markers are added to the map when new vehicles appear",
+        "Existing vehicle markers update their positions when location data changes",
+        "Vehicle markers are removed when vehicles are no longer in the data",
+        "No duplicate markers exist for the same vehicle",
+        "Marker updates happen smoothly without flickering"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/TransportMap.tsx",
+          "operation": "modify",
+          "description": "Implement a marker management system using React useEffect and useRef to track vehicle markers by ID. Create a Map<string, google.maps.Marker> to store marker references keyed by vehicle ID. On vehicle data updates: (1) iterate through new vehicle data and either create new markers or update positions of existing markers using setPosition(), (2) identify and remove markers for vehicles no longer in the dataset, (3) ensure marker icons properly reflect vehicle type using the VehicleType enum. Implement smooth marker position updates and prevent flickering by reusing marker instances rather than recreating them. Add info windows showing vehicle name and type when markers are clicked."
+        }
+      ]
+    }
+  ]
+}

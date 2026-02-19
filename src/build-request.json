@@ -1,0 +1,93 @@
+{
+  "kind": "build_request",
+  "title": "Fix GPS vehicle tracking on transport map",
+  "projectName": "My Belgavi",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-34",
+      "text": "Debug and fix the live GPS vehicle tracking in TransportMap.tsx so that vehicle locations are fetched from the backend getVehicleLocations query and displayed as moving markers on the Google Maps interface with proper automatic updates",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-current"
+        ],
+        "quotes": [
+          "Again Gps tracking is not working"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Vehicle locations are successfully fetched from backend getVehicleLocations query",
+        "Vehicle markers appear on the Google Maps component in the transport page",
+        "Vehicle markers update their positions automatically as location data changes",
+        "No console errors related to GPS tracking or map marker updates",
+        "Users can see real-time vehicle movement on the map"
+      ]
+    },
+    {
+      "id": "REQ-35",
+      "text": "Verify that the backend getVehicleLocations query returns valid vehicle location data with all required fields (id, name, latitude, longitude, type) and proper data types",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-current"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend query returns an array of vehicle location objects",
+        "Each vehicle object contains id, name, latitude, longitude, and type fields",
+        "Latitude and longitude values are valid Float coordinates",
+        "Query executes without errors when called from frontend"
+      ]
+    },
+    {
+      "id": "REQ-36",
+      "text": "Ensure the frontend useQueries hook in useQueries.ts properly configures the vehicle locations query with appropriate refetch intervals (e.g., every 5 seconds) and error handling",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-current"
+        ]
+      },
+      "acceptanceCriteria": [
+        "useVehicleLocations hook is properly configured with refetchInterval",
+        "Query automatically refetches vehicle data at regular intervals",
+        "Error states are properly handled and displayed to users",
+        "Loading states are shown while fetching data"
+      ]
+    },
+    {
+      "id": "REQ-37",
+      "text": "Fix the Google Maps marker management in TransportMap.tsx to properly add, update, and remove vehicle markers as location data changes, ensuring markers move smoothly without duplicates",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-current"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Vehicle markers are added to the map when new vehicles appear",
+        "Existing vehicle markers update their positions when location data changes",
+        "Vehicle markers are removed when vehicles are no longer in the data",
+        "No duplicate markers exist for the same vehicle",
+        "Marker updates happen smoothly without flickering"
+      ]
+    }
+  ],
+  "constraints": [
+    "Maintain single-actor backend architecture in main.mo",
+    "Do not modify immutable frontend paths: useInternetIdentity.ts, useInternetIdentity.tsx, useActor.ts, main.tsx, components/ui",
+    "Use Google Maps API as already integrated in TransportMap.tsx",
+    "Preserve existing transport data structure and static locations (train stations, parking, EV stations)"
+  ],
+  "nonGoals": [
+    "Adding new vehicle types or data fields beyond existing structure",
+    "Implementing historical vehicle tracking or route replay features",
+    "Adding real-time vehicle speed or status indicators",
+    "Creating a vehicle management admin interface"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

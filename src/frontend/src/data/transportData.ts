@@ -1,0 +1,90 @@
+export const transportData = {
+  busRoutes: [
+    {
+      routeNumber: '1A',
+      origin: 'Bus Stand',
+      destination: 'Hindalga',
+      timings: ['6:00 AM', '7:30 AM', '9:00 AM', '11:00 AM', '1:00 PM', '3:00 PM', '5:00 PM', '7:00 PM'],
+    },
+    {
+      routeNumber: '2B',
+      origin: 'Railway Station',
+      destination: 'Khanapur',
+      timings: ['6:30 AM', '8:00 AM', '10:00 AM', '12:00 PM', '2:00 PM', '4:00 PM', '6:00 PM'],
+    },
+    {
+      routeNumber: '3C',
+      origin: 'Camp',
+      destination: 'Angol',
+      timings: ['7:00 AM', '9:30 AM', '12:30 PM', '3:30 PM', '6:30 PM'],
+    },
+    {
+      routeNumber: '4D',
+      origin: 'Tilakwadi',
+      destination: 'Gokak',
+      timings: ['6:00 AM', '8:30 AM', '11:30 AM', '2:30 PM', '5:30 PM'],
+    },
+  ],
+  taxiServices: [
+    { name: 'City Cabs', phone: '+91 831 2401234', area: 'All Belgavi' },
+    { name: 'Quick Auto Service', phone: '+91 831 2405678', area: 'Camp Area' },
+    { name: 'Belgavi Taxi Stand', phone: '+91 831 2409012', area: 'Railway Station' },
+    { name: 'Airport Cabs', phone: '+91 831 2403456', area: 'Airport & City' },
+    { name: 'Local Auto Union', phone: '+91 831 2407890', area: 'Tilakwadi' },
+    { name: 'Express Taxi', phone: '+91 831 2402345', area: 'All Belgavi' },
+  ],
+  parkingSpots: [
+    { location: 'MG Road Parking', capacity: 150, available: 45, latitude: 15.8497, longitude: 74.4977 },
+    { location: 'Railway Station Parking', capacity: 200, available: 78, latitude: 15.8622, longitude: 74.5053 },
+    { location: 'Camp Market Parking', capacity: 100, available: 12, latitude: 15.8520, longitude: 74.5010 },
+    { location: 'Tilakwadi Complex', capacity: 80, available: 35, latitude: 15.8450, longitude: 74.4850 },
+    { location: 'City Mall Parking', capacity: 250, available: 120, latitude: 15.8555, longitude: 74.4920 },
+    { location: 'Hospital Parking', capacity: 120, available: 55, latitude: 15.8480, longitude: 74.4900 },
+  ],
+  evStations: [
+    {
+      name: 'Belgavi EV Hub',
+      address: 'MG Road, Near City Center',
+      chargerType: 'Fast Charging (50kW)',
+      latitude: 15.8497,
+      longitude: 74.4977,
+    },
+    {
+      name: 'Green Charge Station',
+      address: 'Tilakwadi, Opposite Mall',
+      chargerType: 'Fast Charging (50kW)',
+      latitude: 15.8450,
+      longitude: 74.4850,
+    },
+    {
+      name: 'Power Point EV',
+      address: 'Camp Area, Main Road',
+      chargerType: 'Standard Charging (22kW)',
+      latitude: 15.8520,
+      longitude: 74.5010,
+    },
+    {
+      name: 'Quick Charge Belgavi',
+      address: 'Railway Station Complex',
+      chargerType: 'Fast Charging (50kW)',
+      latitude: 15.8622,
+      longitude: 74.5053,
+    },
+  ],
+  trainStations: [
+    {
+      name: 'Belagavi Railway Station',
+      code: 'BGM',
+      location: 'Railway Station Road, Belgavi',
+      latitude: 15.8622,
+      longitude: 74.5053,
+    },
+    {
+      name: 'Londa Junction',
+      code: 'LD',
+      location: 'Londa, Belgavi District',
+      latitude: 15.4700,
+      longitude: 74.5200,
+    },
+  ],
+};

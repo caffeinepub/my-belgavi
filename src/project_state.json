@@ -1,0 +1,439 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 13,
+  "summary": "My Belgavi - A comprehensive smart city application for Belagavi featuring civic services, complaint management, traffic/transport info, emergency services, utilities dashboard, citizen engagement, tourism guide, business/jobs section, digital payments, AI-powered alerts, and city official dashboards",
+  "architectural_notes": [
+    "Multi-language support required (Kannada + English)",
+    "Integration needed with Belagavi City Corporation APIs",
+    "GPS location services for complaint tracking and emergency features",
+    "UPI payment gateway integration for municipal services",
+    "Real-time data feeds for traffic, weather, and utilities",
+    "Photo upload and storage system for complaints",
+    "Push notification system for alerts and updates",
+    "Blockchain infrastructure for complaint tracking transparency",
+    "AI/ML components for chatbot, traffic prediction, and complaint classification",
+    "Separate admin dashboard for city officials with analytics"
+  ],
+  "known_issues": [
+    "Live GPS vehicle tracking not functioning on transport map"
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-create-a-civic-services-module-that-allows-users-to-view-and-access-property-tax-payment-water-bill-payment-electricity-bill-links-hescom-trade-license-renewal-and-birth-death-certificate-services-with-placeholder-integration-points-for-belagavi-city-corporation",
+      "title": "Create a civic services module that allows users to view and access property tax payment, water bill payment, electricity bill links (HESCOM), trade license renewal, and birth & death certificate services with placeholder integration points for Belagavi City Corporation",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-grievance-and-complaint-registration-system-where-users-can-submit-complaints-receive-unique-tracking-numbers-and-view-complaint-status",
+      "title": "Implement a grievance and complaint registration system where users can submit complaints, receive unique tracking numbers, and view complaint status",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-rating-functionality-to-the-complaint-system-where-users-can-rate-resolved-complaints-on-a-scale-e-g-1-5-stars-after-resolution",
+      "title": "Add rating functionality to the complaint system where users can rate resolved complaints on a scale (e.g., 1-5 stars) after resolution",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-live-traffic-and-transport-section-displaying-bus-timings-nwkrtc-auto-taxi-contact-directory-parking-availability-information-and-ev-charging-stations-map-with-placeholder-data",
+      "title": "Create a live traffic and transport section displaying bus timings (NWKRTC), auto/taxi contact directory, parking availability information, and EV charging stations map with placeholder data",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-an-emergency-services-module-with-a-prominent-one-tap-emergency-button-and-contact-lists-for-police-stations-nearby-hospitals-fire-stations-and-blood-banks-in-belagavi",
+      "title": "Implement an emergency services module with a prominent one-tap emergency button and contact lists for police stations, nearby hospitals, fire stations, and blood banks in Belagavi",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-smart-utilities-dashboard-showing-water-supply-schedule-power-cut-alerts-garbage-collection-schedule-and-weather-updates-for-belagavi",
+      "title": "Create a smart utilities dashboard showing water supply schedule, power cut alerts, garbage collection schedule, and weather updates for Belagavi",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-citizen-engagement-section-featuring-polls-and-surveys-public-event-notifications-local-news-updates-volunteer-opportunities-and-a-community-discussion-forum",
+      "title": "Build a citizen engagement section featuring polls and surveys, public event notifications, local news updates, volunteer opportunities, and a community discussion forum",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-tourism-and-city-guide-featuring-belagavi-tourist-places-belagavi-fort-gokak-falls-kapileshwar-temple-hotel-directory-restaurant-guide-local-markets-info-and-historical-information",
+      "title": "Create a tourism and city guide featuring Belagavi tourist places (Belagavi Fort, Gokak Falls, Kapileshwar Temple), hotel directory, restaurant guide, local markets info, and historical information",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-business-and-jobs-section-with-local-business-listings-startup-support-information-job-postings-internship-opportunities-and-skill-training-center-details",
+      "title": "Implement a business and jobs section with local business listings, startup support information, job postings, internship opportunities, and skill training center details",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-digital-payments-section-with-placeholders-for-upi-integration-municipal-fine-payment-parking-fee-payment-and-event-ticket-booking",
+      "title": "Create a digital payments section with placeholders for UPI integration, municipal fine payment, parking fee payment, and event ticket booking",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-smart-alerts-system-displaying-flood-alerts-air-quality-index-and-push-notification-placeholders-for-weather-and-utility-updates",
+      "title": "Implement a smart alerts system displaying flood alerts, air quality index, and push notification placeholders for weather and utility updates",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-city-official-dashboard-accessible-to-admin-users-that-displays-complaint-analytics-data-visualizations-complaint-heatmap-by-type-and-location-and-smart-city-kpi-tracking-metrics",
+      "title": "Build a city official dashboard accessible to admin users that displays complaint analytics, data visualizations, complaint heatmap by type and location, and smart city KPI tracking metrics",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-user-authentication-system-using-internet-identity-integration-for-citizen-digital-id-login",
+      "title": "Create a user authentication system using Internet Identity integration for citizen digital ID login",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-responsive-navigation-structure-that-organizes-all-features-into-logical-sections-accessible-from-a-main-menu-with-clear-categorization-for-civic-services-complaints-transport-emergencies-utilities-engagement-tourism-business-payments-alerts-and-admin-dashboard",
+      "title": "Implement a responsive navigation structure that organizes all features into logical sections accessible from a main menu with clear categorization for civic services, complaints, transport, emergencies, utilities, engagement, tourism, business, payments, alerts, and admin dashboard",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-design-and-generate-a-consistent-visual-theme-for-the-app-that-reflects-a-modern-smart-city-aesthetic-with-indian-government-service-inspiration-using-professional-colors-and-clean-typography-that-works-well-for-civic-engagement-avoiding-blue-and-purple",
+      "title": "Design and generate a consistent visual theme for the app that reflects a modern smart city aesthetic with Indian government service inspiration, using professional colors and clean typography that works well for civic engagement, avoiding blue and purple",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-home-page-that-serves-as-the-main-dashboard-featuring-quick-access-cards-to-key-services-emergency-button-file-complaint-utilities-payments-recent-alerts-and-featured-tourist-attractions",
+      "title": "Create a home page that serves as the main dashboard, featuring quick access cards to key services (emergency button, file complaint, utilities, payments), recent alerts, and featured tourist attractions",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-render-generated-image-assets-including-app-logo-smart-city-hero-banner-emergency-services-icon-tourism-place-photos-belagavi-fort-gokak-falls-kapileshwar-temple-and-section-icons-as-static-assets-in-frontend-public-assets-generated",
+      "title": "Render generated image assets including app logo, smart city hero banner, emergency services icon, tourism place photos (Belagavi Fort, Gokak Falls, Kapileshwar Temple), and section icons as static assets in frontend/public/assets/generated",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-real-time-gps-location-tracking-to-the-complaint-submission-form-that-captures-the-user-s-current-location-coordinates-latitude-longitude-when-filing-a-complaint",
+      "title": "Add real-time GPS location tracking to the complaint submission form that captures the user's current location coordinates (latitude/longitude) when filing a complaint",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-complaint-location-on-a-map-view-in-the-complaint-tracking-interface-so-users-can-see-where-their-submitted-complaints-are-located",
+      "title": "Display complaint location on a map view in the complaint tracking interface so users can see where their submitted complaints are located",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-real-time-status-tracking-for-complaints-that-shows-live-updates-when-complaint-status-changes-from-pending-to-in-progress-to-resolved",
+      "title": "Add real-time status tracking for complaints that shows live updates when complaint status changes from Pending to In Progress to Resolved",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-train-schedule-section-in-the-transport-page-displaying-train-timings-routes-and-station-information-for-trains-serving-belagavi",
+      "title": "Create a train schedule section in the transport page displaying train timings, routes, and station information for trains serving Belagavi",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-integrate-google-maps-component-into-the-transport-page-to-display-an-interactive-map-showing-train-stations-parking-locations-and-ev-charging-stations-in-belagavi",
+      "title": "Integrate Google Maps component into the transport page to display an interactive map showing train stations, parking locations, and EV charging stations in Belagavi",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-expand-the-tourism-places-section-by-adding-at-least-5-new-tourist-attractions-beyond-the-existing-belagavi-fort-gokak-falls-and-kapileshwar-temple-locations",
+      "title": "Expand the tourism places section by adding at least 5 new tourist attractions beyond the existing Belagavi Fort, Gokak Falls, and Kapileshwar Temple locations",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-enhance-the-train-schedule-display-on-the-transport-page-with-improved-visual-layout-filtering-capabilities-and-detailed-route-information-for-all-train-routes-serving-belagavi",
+      "title": "Enhance the train schedule display on the transport page with improved visual layout, filtering capabilities, and detailed route information for all train routes serving Belagavi",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-render-generated-images-for-the-new-tourism-places-as-static-assets-in-frontend-public-assets-generated-directory",
+      "title": "Render generated images for the new tourism places as static assets in frontend/public/assets/generated directory",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-train-schedule-display-on-the-transport-page-so-that-train-routes-and-timings-are-properly-shown-to-users",
+      "title": "Fix the train schedule display on the transport page so that train routes and timings are properly shown to users",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-live-gps-vehicle-tracking-functionality-that-displays-moving-vehicles-on-the-google-maps-component-in-the-transport-page",
+      "title": "Add live GPS vehicle tracking functionality that displays moving vehicles on the Google Maps component in the transport page",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-convert-the-home-page-into-a-login-first-landing-page-that-requires-internet-identity-authentication-before-users-can-access-any-app-features",
+      "title": "Convert the home page into a login-first landing page that requires Internet Identity authentication before users can access any app features",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-debug-and-fix-the-live-gps-vehicle-tracking-functionality-in-the-transportmap-component-so-that-vehicle-locations-are-properly-fetched-from-the-backend-and-displayed-as-moving-markers-on-the-google-maps-interface",
+      "title": "Debug and fix the live GPS vehicle tracking functionality in the TransportMap component so that vehicle locations are properly fetched from the backend and displayed as moving markers on the Google Maps interface",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-verify-that-the-backend-getvehiclelocations-query-is-properly-returning-vehicle-location-data-and-that-the-frontend-usequeries-hook-is-correctly-configured-to-fetch-this-data",
+      "title": "Verify that the backend getVehicleLocations query is properly returning vehicle location data and that the frontend useQueries hook is correctly configured to fetch this data",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-google-maps-api-integration-in-transportmap-tsx-properly-handles-dynamic-vehicle-marker-updates-including-adding-updating-and-removing-markers-as-vehicle-locations-change",
+      "title": "Ensure the Google Maps API integration in TransportMap.tsx properly handles dynamic vehicle marker updates including adding, updating, and removing markers as vehicle locations change",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-debug-and-fix-the-live-gps-vehicle-tracking-in-transportmap-tsx-so-that-vehicle-locations-are-fetched-from-the-backend-getvehiclelocations-query-and-displayed-as-moving-markers-on-the-google-maps-interface-with-proper-automatic-updates",
+      "title": "Debug and fix the live GPS vehicle tracking in TransportMap.tsx so that vehicle locations are fetched from the backend getVehicleLocations query and displayed as moving markers on the Google Maps interface with proper automatic updates",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-frontend-usequeries-hook-in-usequeries-ts-properly-configures-the-vehicle-locations-query-with-appropriate-refetch-intervals-e-g-every-5-seconds-and-error-handling",
+      "title": "Ensure the frontend useQueries hook in useQueries.ts properly configures the vehicle locations query with appropriate refetch intervals (e.g., every 5 seconds) and error handling",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-google-maps-marker-management-in-transportmap-tsx-to-properly-add-update-and-remove-vehicle-markers-as-location-data-changes-ensuring-markers-move-smoothly-without-duplicates",
+      "title": "Fix the Google Maps marker management in TransportMap.tsx to properly add, update, and remove vehicle markers as location data changes, ensuring markers move smoothly without duplicates",
+      "reqIds": [
+        "REQ-37"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Civic services integration (property tax, water/electricity bills, licenses, certificates, grievances)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Smart complaint system with photo upload, GPS tagging, tracking, and ratings",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Live traffic & transport (bus timings, parking, EV stations, taxi directory)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Emergency services with one-tap button and nearby facility listings",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Smart utilities dashboard (water schedule, power alerts, garbage collection, weather)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Citizen engagement (polls, events, news, volunteers, community forum)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Tourism & city guide with places, hotels, restaurants, and historical info",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Business & jobs section (listings, startups, jobs, internships, training)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Digital payments integration (UPI, fines, parking, tickets)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Smart alerts & AI features (flood/air quality alerts, bilingual chatbot, AI classification)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Advanced features (citizen digital ID, QR verification, blockchain tracking, SOS)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "City official dashboard with analytics, complaint heatmap, and KPI tracking",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Build a smart complaint system that allows users to upload a photo of an issue (pothole, garbage, streetlight), add a description, and submit the complaint with status tracking (Pending, In Progress, Resolved)",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Live tracking and GPS tracking feature",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Train schedule information",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-22",
+      "summary": "Add backend storage and retrieval endpoints for train schedule data including train numbers, timings, routes, and station information",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-23",
+      "summary": "Add Google Maps integration to the app",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-24",
+      "summary": "Expand tourism places section with additional tourist attractions beyond initial three locations",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-25",
+      "summary": "Add train route schedules and details for Belagavi to Kalburgi, Hubballi, Goa, Bengaluru, and Mysore",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-26",
+      "summary": "Convert front page to a login page with authentication before accessing main app features",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-27",
+      "summary": "Add live GPS vehicle tracking with vehicles displayed on the map",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-29",
+      "summary": "Verify that the backend getVehicleLocations query returns valid vehicle location data with all required fields (id, name, latitude, longitude, type) and proper data types",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "My Belgavi",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
