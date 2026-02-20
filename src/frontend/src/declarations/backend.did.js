@@ -19,17 +19,6 @@ export const _CaffeineStorageRefillResult = IDL.Record({
   'success' : IDL.Opt(IDL.Bool),
   'topped_up_amount' : IDL.Opt(IDL.Nat),
 });
-export const VehicleType = IDL.Variant({
-  'bus' : IDL.Null,
-  'car' : IDL.Null,
-  'fireTruck' : IDL.Null,
-  'train' : IDL.Null,
-  'truck' : IDL.Null,
-  'other' : IDL.Text,
-  'bike' : IDL.Null,
-  'ambulance' : IDL.Null,
-  'police' : IDL.Null,
-});
 export const TrainStation = IDL.Record({
   'code' : IDL.Text,
   'name' : IDL.Text,
@@ -72,6 +61,17 @@ export const Complaint = IDL.Record({
   'rating' : IDL.Opt(IDL.Nat),
   'photo' : IDL.Opt(ExternalBlob),
   'location' : IDL.Text,
+});
+export const VehicleType = IDL.Variant({
+  'bus' : IDL.Null,
+  'car' : IDL.Null,
+  'fireTruck' : IDL.Null,
+  'train' : IDL.Null,
+  'truck' : IDL.Null,
+  'other' : IDL.Text,
+  'bike' : IDL.Null,
+  'ambulance' : IDL.Null,
+  'police' : IDL.Null,
 });
 export const Vehicle = IDL.Record({
   'id' : IDL.Text,
@@ -118,7 +118,7 @@ export const idlService = IDL.Service({
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
   'addComplaintRating' : IDL.Func([IDL.Text, IDL.Nat, IDL.Text], [], []),
   'addOrUpdateVehicleLocation' : IDL.Func(
-      [IDL.Text, IDL.Text, IDL.Float64, IDL.Float64, VehicleType, IDL.Int],
+      [IDL.Text, IDL.Float64, IDL.Float64, IDL.Int],
       [],
       [],
     ),
@@ -216,17 +216,6 @@ export const idlFactory = ({ IDL }) => {
     'success' : IDL.Opt(IDL.Bool),
     'topped_up_amount' : IDL.Opt(IDL.Nat),
   });
-  const VehicleType = IDL.Variant({
-    'bus' : IDL.Null,
-    'car' : IDL.Null,
-    'fireTruck' : IDL.Null,
-    'train' : IDL.Null,
-    'truck' : IDL.Null,
-    'other' : IDL.Text,
-    'bike' : IDL.Null,
-    'ambulance' : IDL.Null,
-    'police' : IDL.Null,
-  });
   const TrainStation = IDL.Record({
     'code' : IDL.Text,
     'name' : IDL.Text,
@@ -269,6 +258,17 @@ export const idlFactory = ({ IDL }) => {
     'rating' : IDL.Opt(IDL.Nat),
     'photo' : IDL.Opt(ExternalBlob),
     'location' : IDL.Text,
+  });
+  const VehicleType = IDL.Variant({
+    'bus' : IDL.Null,
+    'car' : IDL.Null,
+    'fireTruck' : IDL.Null,
+    'train' : IDL.Null,
+    'truck' : IDL.Null,
+    'other' : IDL.Text,
+    'bike' : IDL.Null,
+    'ambulance' : IDL.Null,
+    'police' : IDL.Null,
   });
   const Vehicle = IDL.Record({
     'id' : IDL.Text,
@@ -315,7 +315,7 @@ export const idlFactory = ({ IDL }) => {
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
     'addComplaintRating' : IDL.Func([IDL.Text, IDL.Nat, IDL.Text], [], []),
     'addOrUpdateVehicleLocation' : IDL.Func(
-        [IDL.Text, IDL.Text, IDL.Float64, IDL.Float64, VehicleType, IDL.Int],
+        [IDL.Text, IDL.Float64, IDL.Float64, IDL.Int],
         [],
         [],
       ),

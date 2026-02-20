@@ -9,9 +9,9 @@ import MixinStorage "blob-storage/Mixin";
 import MixinAuthorization "authorization/MixinAuthorization";
 import AccessControl "authorization/access-control";
 import Float "mo:core/Float";
-import Migration "migration";
 
-(with migration = Migration.run)
+
+
 actor {
   include MixinStorage();
 
@@ -370,10 +370,8 @@ actor {
   // Live GPS Vehicle Tracking
   public shared ({ caller }) func addOrUpdateVehicleLocation(
     vehicleId : Text,
-    name : Text,
     latitude : Float,
     longitude : Float,
-    vehicleType : VehicleType,
     timestamp : Int,
   ) : async () {
     if (not (AccessControl.isAdmin(accessControlState, caller))) {
@@ -390,10 +388,10 @@ actor {
 
     let vehicle : Vehicle = {
       id = vehicleId;
-      name;
+      name = vehicleId;
       latitude;
       longitude;
-      vehicleType;
+      vehicleType = #car; // Default vehicle type
       timestamp;
     };
 
@@ -479,3 +477,4 @@ actor {
     );
   };
 };
+

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 13,
+  "projectStateVersion": 15,
   "summary": "My Belgavi - A comprehensive smart city application for Belagavi featuring civic services, complaint management, traffic/transport info, emergency services, utilities dashboard, citizen engagement, tourism guide, business/jobs section, digital payments, AI-powered alerts, and city official dashboards",
   "architectural_notes": [
     "Multi-language support required (Kannada + English)",
@@ -290,6 +290,14 @@
         "REQ-37"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-connect-the-frontend-to-call-addorupdatevehiclelocation-backend-function-and-enable-periodic-vehicle-location-updates-to-show-movement-on-the-transport-map",
+      "title": "Connect the frontend to call addOrUpdateVehicleLocation backend function and enable periodic vehicle location updates to show movement on the transport map",
+      "reqIds": [
+        "REQ-39"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -386,14 +394,6 @@
       "status": "pending"
     },
     {
-      "id": "AR-22",
-      "summary": "Add backend storage and retrieval endpoints for train schedule data including train numbers, timings, routes, and station information",
-      "reqIds": [
-        "REQ-23"
-      ],
-      "status": "pending"
-    },
-    {
       "id": "AR-23",
       "summary": "Add Google Maps integration to the app",
       "reqIds": [],
@@ -424,10 +424,18 @@
       "status": "pending"
     },
     {
-      "id": "AR-29",
-      "summary": "Verify that the backend getVehicleLocations query returns valid vehicle location data with all required fields (id, name, latitude, longitude, type) and proper data types",
+      "id": "AR-28",
+      "summary": "Add a backend update function addOrUpdateVehicleLocation that accepts vehicle ID, latitude, longitude, and timestamp to enable real-time GPS location updates for vehicles",
       "reqIds": [
-        "REQ-35"
+        "REQ-38"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-30",
+      "summary": "Enhance the train schedule display on the transport page with comprehensive schedule information, improved visual layout, and better filtering capabilities",
+      "reqIds": [
+        "REQ-40"
       ],
       "status": "pending"
     }

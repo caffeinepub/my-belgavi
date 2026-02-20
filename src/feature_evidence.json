@@ -2,29 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-debug-and-fix-the-live-gps-vehicle-tracking-in-transportmap-tsx-so-that-vehicle-locations-are-fetched-from-the-backend-getvehiclelocations-query-and-displayed-as-moving-markers-on-the-google-maps-interface-with-proper-automatic-updates",
-      "featureTitle": "Debug and fix the live GPS vehicle tracking in TransportMap.tsx so that vehicle locations are fetched from the backend getVehicleLocations query and displayed as moving markers on the Google Maps interface with proper automatic updates",
+      "featureId": "feature-connect-the-frontend-to-call-addorupdatevehiclelocation-backend-function-and-enable-periodic-vehicle-location-updates-to-show-movement-on-the-transport-map",
+      "featureTitle": "Connect the frontend to call addOrUpdateVehicleLocation backend function and enable periodic vehicle location updates to show movement on the transport map",
       "files": [
-        "frontend/src/components/TransportMap.tsx"
-      ],
-      "components": [
-        "authorization@4.0.0",
-        "blob-storage@4.0.0",
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-34"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-ensure-the-frontend-usequeries-hook-in-usequeries-ts-properly-configures-the-vehicle-locations-query-with-appropriate-refetch-intervals-e-g-every-5-seconds-and-error-handling",
-      "featureTitle": "Ensure the frontend useQueries hook in useQueries.ts properly configures the vehicle locations query with appropriate refetch intervals (e.g., every 5 seconds) and error handling",
-      "files": [
+        "frontend/src/components/TransportMap.tsx",
         "frontend/src/hooks/useQueries.ts"
       ],
       "components": [
@@ -37,27 +18,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-36"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-fix-the-google-maps-marker-management-in-transportmap-tsx-to-properly-add-update-and-remove-vehicle-markers-as-location-data-changes-ensuring-markers-move-smoothly-without-duplicates",
-      "featureTitle": "Fix the Google Maps marker management in TransportMap.tsx to properly add, update, and remove vehicle markers as location data changes, ensuring markers move smoothly without duplicates",
-      "files": [
-        "frontend/src/components/TransportMap.tsx"
-      ],
-      "components": [
-        "authorization@4.0.0",
-        "blob-storage@4.0.0",
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-37"
+        "REQ-39"
       ],
       "confidence": "high"
     }

@@ -239,3 +239,46 @@ export function useGetVehicleLocationsInBounds(
     staleTime: 0,
   });
 }
+
+// Vehicle Location Update Mutation
+export function useAddOrUpdateVehicleLocation() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      vehicleId,
+      latitude,
+      longitude,
+      timestamp,
+    }: {
+      vehicleId: string;
+      latitude: number;
+      longitude: number;
+      timestamp?: bigint;
+    }) => {
+      if (!actor) throw new Error('Actor not available');
+      
+      // Validate coordinates
+      if (latitude < -90 || latitude > 90) {
+        throw new Error('Invalid latitude. Must be between -90 and 90');
+      }
+      if (longitude < -180 || longitude > 180) {
+        throw new Error('Invalid longitude. Must be between -180 and 180');
+      }
+
+      const ts = timestamp || BigInt(Date.now() * 1000000); // Convert to nanoseconds
+      console.log(`[Vehicle Update] Updating vehicle ${vehicleId} to (${latitude}, ${longitude})`);
+      
+      return actor.addOrUpdateVehicleLocation(vehicleId, latitude, longitude, ts);
+    },
+    onSuccess: (_, variables) => {
+      console.log(`[Vehicle Update] Successfully updated vehicle ${variables.vehicleId}`);
+      // Invalidate vehicle locations to trigger refetch
+      queryClient.invalidateQueries({ queryKey: ['vehicleLocations'] });
+    },
+    onError: (error, variables) => {
+      console.error(`[Vehicle Update] Failed to update vehicle ${variables.vehicleId}:`, error);
+    },
+  });
+}

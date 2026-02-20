@@ -1,90 +1,84 @@
 {
   "kind": "build_request",
-  "title": "Fix GPS vehicle tracking on transport map",
+  "title": "Implement vehicle location update function and enhance train schedule",
   "projectName": "My Belgavi",
-  "priority": "high",
+  "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-34",
-      "text": "Debug and fix the live GPS vehicle tracking in TransportMap.tsx so that vehicle locations are fetched from the backend getVehicleLocations query and displayed as moving markers on the Google Maps interface with proper automatic updates",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-current"
-        ],
-        "quotes": [
-          "Again Gps tracking is not working"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Vehicle locations are successfully fetched from backend getVehicleLocations query",
-        "Vehicle markers appear on the Google Maps component in the transport page",
-        "Vehicle markers update their positions automatically as location data changes",
-        "No console errors related to GPS tracking or map marker updates",
-        "Users can see real-time vehicle movement on the map"
-      ]
-    },
-    {
-      "id": "REQ-35",
-      "text": "Verify that the backend getVehicleLocations query returns valid vehicle location data with all required fields (id, name, latitude, longitude, type) and proper data types",
+      "id": "REQ-38",
+      "text": "Add a backend update function addOrUpdateVehicleLocation that accepts vehicle ID, latitude, longitude, and timestamp to enable real-time GPS location updates for vehicles",
       "target": "backend",
       "source": {
         "messageIds": [
-          "msg-current"
+          "msg-user-addOrUpdateVehicleLocation",
+          "msg-assistant-explanation",
+          "msg-user-yes-train-schedule"
+        ],
+        "quotes": [
+          "addOrUpdateVehicleLocation",
+          "Add a backend update function (addOrUpdateVehicleLocation) that accepts vehicle ID, coordinates, and timestamp"
         ]
       },
       "acceptanceCriteria": [
-        "Backend query returns an array of vehicle location objects",
-        "Each vehicle object contains id, name, latitude, longitude, and type fields",
-        "Latitude and longitude values are valid Float coordinates",
-        "Query executes without errors when called from frontend"
+        "Backend function addOrUpdateVehicleLocation exists and accepts vehicleId (Text), latitude (Float), longitude (Float), and timestamp (Int) parameters",
+        "Function updates existing vehicle location if vehicle ID exists, or creates new vehicle record if it doesn't exist",
+        "Updated location data is immediately available via getVehicleLocations query",
+        "Function handles invalid coordinates and missing vehicle IDs gracefully with appropriate error messages"
       ]
     },
     {
-      "id": "REQ-36",
-      "text": "Ensure the frontend useQueries hook in useQueries.ts properly configures the vehicle locations query with appropriate refetch intervals (e.g., every 5 seconds) and error handling",
+      "id": "REQ-39",
+      "text": "Connect the frontend to call addOrUpdateVehicleLocation backend function and enable periodic vehicle location updates to show movement on the transport map",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-current"
+          "msg-assistant-explanation",
+          "msg-user-yes-train-schedule"
+        ],
+        "quotes": [
+          "Wire the frontend to poll for updates every few seconds to show movement"
         ]
       },
       "acceptanceCriteria": [
-        "useVehicleLocations hook is properly configured with refetchInterval",
-        "Query automatically refetches vehicle data at regular intervals",
-        "Error states are properly handled and displayed to users",
-        "Loading states are shown while fetching data"
+        "Frontend useQueries.ts includes a mutation hook for addOrUpdateVehicleLocation",
+        "TransportMap component can trigger location updates for test vehicles",
+        "Vehicle markers on the map update smoothly when new location data arrives",
+        "Location update errors are handled and logged appropriately"
       ]
     },
     {
-      "id": "REQ-37",
-      "text": "Fix the Google Maps marker management in TransportMap.tsx to properly add, update, and remove vehicle markers as location data changes, ensuring markers move smoothly without duplicates",
+      "id": "REQ-40",
+      "text": "Enhance the train schedule display on the transport page with comprehensive schedule information, improved visual layout, and better filtering capabilities",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-current"
+          "msg-user-yes-train-schedule"
+        ],
+        "quotes": [
+          "make train schedule"
         ]
       },
       "acceptanceCriteria": [
-        "Vehicle markers are added to the map when new vehicles appear",
-        "Existing vehicle markers update their positions when location data changes",
-        "Vehicle markers are removed when vehicles are no longer in the data",
-        "No duplicate markers exist for the same vehicle",
-        "Marker updates happen smoothly without flickering"
+        "Train schedule display shows detailed timing and route information in an organized table format",
+        "Users can filter trains by station, destination, or route",
+        "Schedule information includes departure times, arrival times, train numbers, and intermediate stations",
+        "Layout is responsive and works well on mobile and desktop devices",
+        "Visual design is consistent with the app's warm orange/amber theme"
       ]
     }
   ],
   "constraints": [
-    "Maintain single-actor backend architecture in main.mo",
-    "Do not modify immutable frontend paths: useInternetIdentity.ts, useInternetIdentity.tsx, useActor.ts, main.tsx, components/ui",
-    "Use Google Maps API as already integrated in TransportMap.tsx",
-    "Preserve existing transport data structure and static locations (train stations, parking, EV stations)"
+    "Maintain single-actor architecture in backend/main.mo",
+    "Do not modify immutable frontend paths (useInternetIdentity.ts, useInternetIdentity.tsx, useActor.ts, main.tsx, components/ui)",
+    "Preserve existing vehicle tracking polling interval of 5 seconds configured in useQueries.ts",
+    "Keep Google Maps integration in TransportMap.tsx intact while adding vehicle update functionality"
   ],
   "nonGoals": [
-    "Adding new vehicle types or data fields beyond existing structure",
-    "Implementing historical vehicle tracking or route replay features",
-    "Adding real-time vehicle speed or status indicators",
-    "Creating a vehicle management admin interface"
+    "Integrating with actual external GPS tracking services or vehicle hardware",
+    "Building a separate GPS tracking backend service or microservice",
+    "Adding real-time WebSocket connections for vehicle updates",
+    "Implementing train schedule API integration with Indian Railways",
+    "Creating a separate admin interface for managing train schedules"
   ],
   "imageRequirements": {
     "required": [],

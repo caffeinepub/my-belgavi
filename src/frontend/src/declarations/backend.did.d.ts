@@ -102,7 +102,7 @@ export interface _SERVICE {
   '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
   'addComplaintRating' : ActorMethod<[string, bigint, string], undefined>,
   'addOrUpdateVehicleLocation' : ActorMethod<
-    [string, string, number, number, VehicleType, bigint],
+    [string, number, number, bigint],
     undefined
   >,
   'addTrainRoute' : ActorMethod<[TrainRoute], undefined>,

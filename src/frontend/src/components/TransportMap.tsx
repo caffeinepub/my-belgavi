@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { MapPin, Navigation, Clock, AlertCircle, Loader2 } from 'lucide-react';
+import { MapPin, Navigation, Clock, AlertCircle, Loader2, Play, Pause } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { useGetAllVehicleLocations } from '../hooks/useQueries';
+import { useGetAllVehicleLocations, useAddOrUpdateVehicleLocation } from '../hooks/useQueries';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { Vehicle, VehicleType } from '../backend';
+import { useIsCallerAdmin } from '../hooks/useQueries';
 
 interface MapLocation {
   name: string;
@@ -57,6 +59,8 @@ export default function TransportMap({ locations }: TransportMapProps) {
   const infoWindowRef = useRef<any>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapError, setMapError] = useState<string | null>(null);
+  const [simulationRunning, setSimulationRunning] = useState(false);
+  const simulationIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const { 
     data: vehicles = [], 
@@ -65,6 +69,9 @@ export default function TransportMap({ locations }: TransportMapProps) {
     isFetched,
     dataUpdatedAt 
   } = useGetAllVehicleLocations();
+
+  const { data: isAdmin = false } = useIsCallerAdmin();
+  const addOrUpdateVehicle = useAddOrUpdateVehicleLocation();
 
   const centerLat = 15.8497;
   const centerLng = 74.4977;
@@ -273,6 +280,53 @@ export default function TransportMap({ locations }: TransportMapProps) {
     console.log(`[TransportMap] Total vehicle markers on map: ${vehicleMarkersRef.current.size}`);
   }, [vehicles, mapLoaded, dataUpdatedAt]);
 
+  // Test vehicle simulation
+  const startSimulation = () => {
+    if (simulationRunning) return;
+    
+    setSimulationRunning(true);
+    console.log('[TransportMap] Starting test vehicle simulation');
+
+    // Create test vehicles with different routes
+    const testVehicles = [
+      { id: 'test-bus-1', name: 'Test Bus 1', lat: centerLat, lng: centerLng, deltaLat: 0.001, deltaLng: 0.001 },
+      { id: 'test-ambulance-1', name: 'Test Ambulance', lat: centerLat + 0.01, lng: centerLng - 0.01, deltaLat: -0.0008, deltaLng: 0.0012 },
+    ];
+
+    let step = 0;
+    simulationIntervalRef.current = setInterval(() => {
+      step++;
+      testVehicles.forEach((vehicle) => {
+        const newLat = vehicle.lat + (vehicle.deltaLat * step);
+        const newLng = vehicle.lng + (vehicle.deltaLng * step);
+        
+        addOrUpdateVehicle.mutate({
+          vehicleId: vehicle.id,
+          latitude: newLat,
+          longitude: newLng,
+        });
+      });
+    }, 3000); // Update every 3 seconds
+  };
+
+  const stopSimulation = () => {
+    if (simulationIntervalRef.current) {
+      clearInterval(simulationIntervalRef.current);
+      simulationIntervalRef.current = null;
+    }
+    setSimulationRunning(false);
+    console.log('[TransportMap] Stopped test vehicle simulation');
+  };
+
+  // Cleanup simulation on unmount
+  useEffect(() => {
+    return () => {
+      if (simulationIntervalRef.current) {
+        clearInterval(simulationIntervalRef.current);
+      }
+    };
+  }, []);
+
   if (mapError) {
     return (
       <Card>
@@ -296,104 +350,119 @@ export default function TransportMap({ locations }: TransportMapProps) {
             </span>
             <div className="flex items-center gap-2">
               {vehiclesLoading && (
-                <Badge variant="outline" className="gap-1">
+                <Badge variant="outline" className="flex items-center gap-1">
                   <Loader2 className="h-3 w-3 animate-spin" />
-                  Loading...
+                  Loading
                 </Badge>
               )}
-              {!vehiclesLoading && vehicles.length > 0 && (
-                <Badge variant="secondary" className="gap-1">
+              {vehicles.length > 0 && (
+                <Badge variant="default" className="flex items-center gap-1">
                   <Navigation className="h-3 w-3" />
-                  {vehicles.length} Vehicle{vehicles.length !== 1 ? 's' : ''} Active
+                  {vehicles.length} Active
                 </Badge>
               )}
             </div>
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {isFetched && vehicles.length === 0 && !vehiclesLoading && (
-              <Alert>
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription>
-                  No vehicles are currently being tracked. Vehicle tracking requires admin users to add vehicle locations via the backend API using the <code className="text-xs bg-muted px-1 py-0.5 rounded">addOrUpdateVehicleLocation</code> method.
-                </AlertDescription>
-              </Alert>
-            )}
+        <CardContent className="space-y-4">
+          {vehiclesError && (
+            <Alert variant="destructive">
+              <AlertCircle className="h-4 w-4" />
+              <AlertDescription>
+                Failed to load vehicle locations. Please try again later.
+              </AlertDescription>
+            </Alert>
+          )}
 
-            {vehiclesError && (
-              <Alert variant="destructive">
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription>
-                  Error loading vehicle locations: {vehiclesError instanceof Error ? vehiclesError.message : 'Unknown error'}
-                </AlertDescription>
-              </Alert>
-            )}
-
-            <div className="relative">
-              <div ref={mapRef} className="w-full h-[500px] rounded-lg border bg-muted" />
-
-              {!mapLoaded && !mapError && (
-                <div className="absolute inset-0 flex items-center justify-center bg-background/80 rounded-lg">
-                  <div className="text-center">
-                    <Loader2 className="h-8 w-8 animate-spin mx-auto mb-2 text-primary" />
-                    <p className="text-sm text-muted-foreground">Loading map...</p>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <div className="flex flex-wrap gap-4 text-sm">
-              <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-primary" />
-                <span>Train Stations ({locations.filter((l) => l.type === 'train').length})</span>
+          {isAdmin && (
+            <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
+              <div className="flex-1">
+                <p className="text-sm font-medium">Test Vehicle Simulation</p>
+                <p className="text-xs text-muted-foreground">
+                  {simulationRunning 
+                    ? 'Simulating vehicle movement on the map' 
+                    : 'Start simulation to test live vehicle tracking'}
+                </p>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-blue-500" />
-                <span>Parking ({locations.filter((l) => l.type === 'parking').length})</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-green-500" />
-                <span>EV Charging ({locations.filter((l) => l.type === 'ev').length})</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-red-500" />
-                <span>Live Vehicles ({vehicles.length})</span>
-              </div>
-            </div>
-
-            {vehicles.length > 0 && (
-              <div className="border-t pt-4">
-                <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
-                  <Clock className="h-4 w-4" />
-                  Active Vehicles
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                  {vehicles.slice(0, 6).map((vehicle) => {
-                    const timestamp = new Date(Number(vehicle.timestamp) / 1000000);
-                    const timeAgo = Math.floor((Date.now() - timestamp.getTime()) / 1000);
-                    const timeStr = timeAgo < 60 ? 'Just now' : timeAgo < 3600 ? `${Math.floor(timeAgo / 60)}m ago` : `${Math.floor(timeAgo / 3600)}h ago`;
-                    const vehicleTypeLabel = getVehicleTypeLabel(vehicle.vehicleType);
-                    
-                    return (
-                      <div key={vehicle.id} className="flex items-center gap-2 p-2 rounded-lg bg-muted/50 text-xs">
-                        <Navigation className="h-3 w-3 text-red-500 flex-shrink-0" />
-                        <div className="flex-1 min-w-0">
-                          <div className="font-medium truncate">{vehicle.name}</div>
-                          <div className="text-muted-foreground">{vehicleTypeLabel} • {timeStr}</div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-                {vehicles.length > 6 && (
-                  <p className="text-xs text-muted-foreground mt-2">
-                    +{vehicles.length - 6} more vehicle{vehicles.length - 6 !== 1 ? 's' : ''} on map
-                  </p>
+              <Button
+                variant={simulationRunning ? 'destructive' : 'default'}
+                size="sm"
+                onClick={simulationRunning ? stopSimulation : startSimulation}
+                disabled={addOrUpdateVehicle.isPending}
+              >
+                {simulationRunning ? (
+                  <>
+                    <Pause className="h-4 w-4 mr-1" />
+                    Stop
+                  </>
+                ) : (
+                  <>
+                    <Play className="h-4 w-4 mr-1" />
+                    Start
+                  </>
                 )}
+              </Button>
+            </div>
+          )}
+
+          <div className="relative">
+            {!mapLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center bg-muted/50 rounded-lg z-10">
+                <div className="text-center">
+                  <Loader2 className="h-8 w-8 animate-spin mx-auto mb-2 text-primary" />
+                  <p className="text-sm text-muted-foreground">Loading map...</p>
+                </div>
               </div>
             )}
+            <div ref={mapRef} className="w-full h-[500px] rounded-lg border" />
           </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div className="flex items-center gap-2">
+              <div className="h-3 w-3 rounded-full bg-[#f97316]" />
+              <span>Train Stations</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="h-3 w-3 rounded-full bg-[#3b82f6]" />
+              <span>Parking Areas</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="h-3 w-3 rounded-full bg-[#22c55e]" />
+              <span>EV Charging Stations</span>
+            </div>
+          </div>
+
+          {vehicles.length > 0 && (
+            <div className="border-t pt-4">
+              <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
+                <Navigation className="h-4 w-4" />
+                Active Vehicles
+              </h4>
+              <div className="space-y-2">
+                {vehicles.map((vehicle) => (
+                  <div
+                    key={vehicle.id}
+                    className="flex items-center justify-between p-2 bg-muted/30 rounded-md text-sm"
+                  >
+                    <div className="flex items-center gap-2">
+                      <div
+                        className="h-2 w-2 rounded-full"
+                        style={{ backgroundColor: getVehicleIconColor(vehicle.vehicleType) }}
+                      />
+                      <span className="font-medium">{vehicle.name}</span>
+                      <Badge variant="outline" className="text-xs">
+                        {getVehicleTypeLabel(vehicle.vehicleType)}
+                      </Badge>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <Clock className="h-3 w-3" />
+                      {new Date(Number(vehicle.timestamp) / 1000000).toLocaleTimeString()}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

@@ -1,12 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Fix the GPS vehicle tracking feature on the transport map so that live vehicle locations are displayed and updated in real-time.
+**Goal:** Enable real-time vehicle location updates and enhance the train schedule display with comprehensive information and filtering.
 
 **Planned changes:**
-- Debug and fix the vehicle location fetching from backend getVehicleLocations query
-- Verify backend query returns valid vehicle data with required fields (id, name, latitude, longitude, type)
-- Configure frontend useQueries hook with proper refetch intervals and error handling
-- Fix Google Maps marker management to properly display, update, and remove vehicle markers without duplicates
+- Add backend function `addOrUpdateVehicleLocation` to accept and store vehicle GPS coordinates and timestamps
+- Connect frontend to call the location update function and enable periodic updates for vehicle tracking
+- Enhance train schedule display with detailed timing, route information, filtering capabilities, and improved visual layout
 
-**User-visible outcome:** Users can see real-time vehicle positions on the transport map, with markers that automatically update their locations as vehicles move.
+**User-visible outcome:** Users can see vehicles moving in real-time on the transport map, and access a comprehensive, filterable train schedule with detailed departure/arrival times and route information.

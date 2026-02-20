@@ -100,7 +100,7 @@ export enum UserRole {
 }
 export interface backendInterface {
     addComplaintRating(complaintId: string, rating: bigint, feedback: string): Promise<void>;
-    addOrUpdateVehicleLocation(vehicleId: string, name: string, latitude: number, longitude: number, vehicleType: VehicleType, timestamp: bigint): Promise<void>;
+    addOrUpdateVehicleLocation(vehicleId: string, latitude: number, longitude: number, timestamp: bigint): Promise<void>;
     addTrainRoute(route: TrainRoute): Promise<void>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     getAllComplaints(): Promise<Array<Complaint>>;
